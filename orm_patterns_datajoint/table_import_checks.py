@@ -28,15 +28,15 @@ class ImportChecks(dj.Imported):
     ---
     check_1             :   bool
     check_2             :   bool
+    importable          :   bool
     """
     # key_source is already implied by definition above, here just explicit
     key_source = SourceTable()
 
     def make(self, key):
-        raise NotImplementedError(
-            "Tests to check that data related to key_source "
-            "can be imported in NextStep table"
-        )
+        # Tests to check that data related to key_source
+        # can be imported in NextStep table
+        pass
 
 
 @schema
@@ -46,10 +46,10 @@ class NextStep(dj.Imported):
     ---
     some_data           :   longblob
     """
-    key_source = ImportChecks()
+    key_source = ImportChecks() & {"importable": True}
 
     def make(self, key):
-        raise NotImplementedError("Actual data import goes here...")
+        pass  # logic for data import goes here
 
 
 # >> END BLOCK: import checks pattern
