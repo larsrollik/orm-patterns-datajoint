@@ -1,7 +1,6 @@
 import datajoint as dj
 
-from orm_patterns_datajoint import get_datajoint_schema
-from orm_patterns_datajoint import prepare_schema_name
+from orm_patterns_datajoint import get_datajoint_schema, prepare_schema_name
 
 # >> START BLOCK: schema generation pattern
 
@@ -13,7 +12,6 @@ schema = get_datajoint_schema(
 
 # >> START BLOCK: table job pattern
 class JobHandler:
-
     def __init__(self, **kwargs):
         pass
 
