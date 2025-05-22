@@ -16,6 +16,9 @@
 
 # orm-patterns-datajoint
 Patterns for Object Relational Mapping (ORM) in Python (here via DataJoint)
+---
+**Version: "0.0.2"**
+
 
 ## Patterns
 
@@ -151,6 +154,54 @@ class JobTable(dj.Imported, JobHandler):
 
 - Then the downstream `JobOutput` table can check for completed jobs and import their outputs/results
 
+
+### Dynamic config loading
+
+Managing configuration files is a common challenge when working with database access in ORM tools. 
+This package provides utility functions for handling configuration files in a standardized way, 
+specifically tailored for DataJoint-Python.
+**Automatic config initialization in `__init__.py`:**
+The package automatically writes a default config (if it does not exist) and patches the DataJoint config on import:
+
+```python
+from orm_patterns_datajoint.config.tools import write_default_config, patch_datajoint_config
+
+write_default_config(exist_ok=True)
+patch_datajoint_config()
+
+```
+
+Manual configuration control: You can write the initial config to a custom location 
+and then specify this path as input to the patch function during initialization.
+
+```python
+from orm_patterns_datajoint.config.tools import (
+    write_default_config,
+    load_config,
+    get_config,
+    save_config,
+    patch_datajoint_config,
+)
+
+CONFIG_PATH = "./custom_config.yaml"
+
+# Write a default config file (will not overwrite existing file)
+write_default_config(exist_ok=True)
+write_default_config(overwrite=True)
+write_default_config(path=CONFIG_PATH)
+
+# Load the config (returns an AppConfig object)
+config = load_config()
+
+# Access the config as a dictionary
+config_dict = get_config()
+
+# Save any changes back to the config file
+save_config()
+
+# Patch DataJoint's config with values from your config
+patch_datajoint_config(path=CONFIG_PATH)
+```
 
 ## Contributing
 Contributions are very welcome!

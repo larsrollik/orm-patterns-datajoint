@@ -1,7 +1,6 @@
 import datajoint as dj
 
-from orm_patterns_datajoint import get_datajoint_schema
-from orm_patterns_datajoint import prepare_schema_name
+from orm_patterns_datajoint import get_datajoint_schema, prepare_schema_name
 
 # >> START BLOCK: schema generation pattern
 
@@ -24,7 +23,7 @@ class SourceTable(dj.Manual):
 @schema
 class ImportChecks(dj.Imported):
     definition = """
-    -> source_key
+    -> SourceTable
     ---
     check_1             :   bool
     check_2             :   bool
@@ -42,7 +41,7 @@ class ImportChecks(dj.Imported):
 @schema
 class NextStep(dj.Imported):
     definition = """
-    -> source_key
+    -> SourceTable
     ---
     some_data           :   longblob
     """
