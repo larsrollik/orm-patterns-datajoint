@@ -174,6 +174,8 @@ patch_datajoint_config()
 Manual configuration control: You can write the initial config to a custom location 
 and then specify this path as input to the patch function during initialization.
 
+> NOTE: the config is not automatically written/loaded, so that after module import, this needs to be done manually.
+
 ```python
 from orm_patterns_datajoint.config.tools import (
     write_default_config,
