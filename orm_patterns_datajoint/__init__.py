@@ -46,7 +46,3 @@ def get_datajoint_schema(
     )
     logging.info(f"Schema: {schema}")
     return schema
-
-
-write_default_config(exist_ok=True)
-patch_datajoint_config()
