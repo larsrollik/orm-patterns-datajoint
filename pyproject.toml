@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "orm_patterns_datajoint"
-version = "0.0.4.dev0"
+version = "0.0.4.dev1"
 authors = [
     { name = "Lars B. Rollik", email = "L.B.Rollik@protonmail.com" }
 ]
