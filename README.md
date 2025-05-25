@@ -17,7 +17,7 @@
 # orm-patterns-datajoint
 Patterns for Object Relational Mapping (ORM) in Python (here via DataJoint)
 ---
-**Version: "0.0.3.dev0"**
+**Version: "0.0.3"**
 
 
 ## Patterns

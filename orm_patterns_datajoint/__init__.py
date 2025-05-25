@@ -12,7 +12,7 @@ from orm_patterns_datajoint.config.tools import (
 try:
     __version__ = version(Path(__file__).parent.name)
 except PackageNotFoundError:
-    __version__ = "0.0.3.dev0"
+    __version__ = "0.0.3"
 
 __all__ = ["write_default_config", "patch_datajoint_config"]
 
