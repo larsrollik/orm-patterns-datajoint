@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "orm_patterns_datajoint"
-version = "0.0.2"
+version = "0.0.4.dev1"
 authors = [
     { name = "Lars B. Rollik", email = "L.B.Rollik@protonmail.com" }
 ]
@@ -20,11 +20,12 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
-#    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.12",
 ]
 requires-python = ">=3.10"
 dependencies = [
     "datajoint",
+    "pydantic",
 ]
 
 [project.urls]
@@ -117,5 +118,5 @@ warn_return_any = false
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
-module = ["requests.*"]
+module = ["requests.*", "yaml.*"]
 ignore_missing_imports = true

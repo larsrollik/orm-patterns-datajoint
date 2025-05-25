@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import logging
 from pathlib import Path
 
@@ -43,7 +45,7 @@ def find_existing_config_path() -> Path:
 
 
 def write_default_config(
-    path: Path = None,
+    path: Path | str | None = None,
     overwrite: bool = False,
     exist_ok: bool = False,
     home_fallback: bool = False,
@@ -54,6 +56,7 @@ def write_default_config(
     Args:
         path: Optional target path to write to.
         overwrite: Whether to overwrite if file exists.
+        exist_ok: If True, do not raise error if file exists.
         home_fallback: If True, fallback to writing in user home dir.
 
     Returns:
@@ -98,7 +101,7 @@ def write_default_config(
     return target
 
 
-def load_config(path: Path = None) -> AppConfig:
+def load_config(path: Path | str = "") -> AppConfig:
     """Load the config and cache both the config and path."""
     global _config, _config_path
     if _config is not None:
@@ -130,7 +133,7 @@ def save_config() -> bool:
     return True
 
 
-def patch_datajoint_config(path: Path = None) -> None:
+def patch_datajoint_config(path: Path | str = "") -> None:
     """Load config and patch dj.config directly with matching keys."""
 
     config = load_config(path).as_original_dict()

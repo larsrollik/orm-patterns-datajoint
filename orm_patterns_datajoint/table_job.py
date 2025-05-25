@@ -1,3 +1,5 @@
+from typing import Any
+
 import datajoint as dj
 
 from orm_patterns_datajoint import get_datajoint_schema, prepare_schema_name
@@ -63,7 +65,7 @@ class JobOutputs(dj.Imported):
 
 if __name__ == "__main__":
     # create jobs
-    job_params = {}
+    job_params: dict[str, Any] = {}
     st = JobTable(**job_params)
     st.populate()
 
