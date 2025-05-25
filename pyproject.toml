@@ -25,6 +25,7 @@ classifiers = [
 requires-python = ">=3.10"
 dependencies = [
     "datajoint",
+    "pydantic",
 ]
 
 [project.urls]
