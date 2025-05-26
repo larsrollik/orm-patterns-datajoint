@@ -39,12 +39,13 @@ def get_datajoint_schema(
 ```
 
 Then in **each** module that will contain table classes:
+
 ```python
 from orm_patterns_datajoint import get_datajoint_schema
-from orm_patterns_datajoint import prepare_schema_name
+from orm_patterns_datajoint import _prepare_schema_name
 
 schema = get_datajoint_schema(
-    schema_name=prepare_schema_name(file=__file__),
+    schema_name=_prepare_schema_name(file=__file__),
     linking_module=__name__
 )
 

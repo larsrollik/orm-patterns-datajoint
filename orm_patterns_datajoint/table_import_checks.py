@@ -1,12 +1,10 @@
 import datajoint as dj
 
-from orm_patterns_datajoint import get_datajoint_schema, prepare_schema_name
+from orm_patterns_datajoint import get_datajoint_schema
 
 # >> START BLOCK: schema generation pattern
 
-schema = get_datajoint_schema(
-    schema_name=prepare_schema_name(file=__file__), linking_module=__name__
-)
+schema = get_datajoint_schema(file=__file__, linking_module=__name__)
 # >> END BLOCK: schema generation pattern
 
 
