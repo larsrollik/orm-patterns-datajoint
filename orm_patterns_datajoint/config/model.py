@@ -1,3 +1,5 @@
+from typing import Any
+
 from pydantic import BaseModel, Field
 
 
@@ -21,13 +23,16 @@ class AppConfig(BaseModel):
     loglevel: str = Field("INFO", alias="loglevel")
     safemode: bool = Field(True, alias="safemode")
 
+    # Add fields that are not directly datajoint package fields
+    global_schema_prefix: str = Field("", alias="global_schema_prefix")
+
     class Config:
         populate_by_name = True  # Allow using field names or aliases for input
         extra = "forbid"  # Forbid unknown keys
 
-    def as_original_dict(self) -> dict:
+    def as_original_dict(self) -> dict[str, Any]:
         """Return config using original dotted keys (as loaded from file)."""
-        return {
+        return_dict = {
             "add_hidden_timestamp": self.add_hidden_timestamp,
             "connection.charset": self.connection_charset,
             "connection.init_function": self.connection_init_function,
@@ -45,4 +50,7 @@ class AppConfig(BaseModel):
             "filepath_checksum_size_limit": self.filepath_checksum_size_limit,
             "loglevel": self.loglevel,
             "safemode": self.safemode,
+            # other fields
+            "global_schema_prefix": self.global_schema_prefix,
         }
+        return return_dict
