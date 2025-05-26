@@ -12,33 +12,27 @@ from orm_patterns_datajoint.config.tools import (
 try:
     __version__ = version(Path(__file__).parent.name)
 except PackageNotFoundError:
-    __version__ = "0.0.4.dev1"
+    __version__ = "0.0.4"
 
 __all__ = ["write_default_config", "patch_datajoint_config"]
 
 
-def prepare_schema_name(file):
-    return Path(file).name.replace(".py", "")
+def _prepare_schema_name(file):
+    return Path(file).stem
 
 
 def get_datajoint_schema(
-    schema_prefix=None,
-    schema_name=None,
-    linking_module=None,
+    file, linking_module, default_global_schema_prefix: str = "GLOBAL_SCHEMA_PREFIX_DEFAULT"
 ):
-    """
-    Check available schemas with:
-        available_schemas = dj.list_schemas()
-
-    """
-    if schema_prefix is None:
-        schema_prefix = dj.config.get("global_schema_prefix", "GLOBAL_SCHEMA_PREFIX_DEFAULT")
+    schema_prefix = dj.config.get("global_schema_prefix", default_global_schema_prefix)
+    schema_name = _prepare_schema_name(file)
+    full_schema_name = f"{schema_prefix}__{schema_name}"
 
     schema = dj.Schema(
-        schema_name="__".join([schema_prefix, schema_name]),
+        schema_name=full_schema_name,
         create_schema=True,
         create_tables=True,
         add_objects=(linking_module.__dict__ if hasattr(linking_module, "__dict__") else None),
     )
-    logging.info(f"Schema: {schema}")
+    logging.info(f"Schema: {full_schema_name}")
     return schema
